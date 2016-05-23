@@ -67,10 +67,10 @@ static C3D_Tex spritesheet_tex;
  * \return    none
  */
 /*===============================================================================*/
-void RDR_DrawSplashScreen(const u8 image[], u32 image_size, u8 leftOrRight)
+void RDR_DrawSplashScreen(gfxScreen_t screen, const u8 image[], u32 image_size, u8 leftOrRight)
 {            
 	// get the top screen's frame buffer
-	u8* ft = gfxGetFramebuffer(GFX_TOP, leftOrRight?GFX_LEFT:GFX_RIGHT, NULL, NULL); 
+	u8* ft = gfxGetFramebuffer(screen, leftOrRight?GFX_LEFT:GFX_RIGHT, NULL, NULL); 
 	
 	// copy image in the top screen's frame buffer
 	memcpy(ft, image, image_size); 	
@@ -254,7 +254,7 @@ void RDR_SceneInit(void) {
 			sprites[i].dy = -sprites[i].dy;
 	}*/
 	
-	RDR_DrawGameBoard();
+	//RDR_DrawGameBoard();
 
 	// Configure depth test to overwrite pixels with the same depth (needed to draw overlapping sprites)
 	C3D_DepthTest(true, GPU_GEQUAL, GPU_WRITE_ALL);
@@ -281,9 +281,12 @@ void RDR_MoveSprites(void) {
 }
 
 //---------------------------------------------------------------------------------
-void RDR_SceneRender(void) {
+void RDR_SceneRender(C3D_RenderTarget* target) {
 //---------------------------------------------------------------------------------
 	int i;
+	C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+	C3D_FrameDrawOn(target);
+	
 	// Update the uniforms
 	C3D_FVUnifMtx4x4(GPU_VERTEX_SHADER, uLoc_projection, &projection);
 
@@ -291,6 +294,8 @@ void RDR_SceneRender(void) {
 
 		RDR_DrawSprite( sprites[i].x >> 8, sprites[i].y >> 8, 32, 32, sprites[i].image);
 	}
+
+	C3D_FrameEnd(0);
 }
 
 //---------------------------------------------------------------------------------

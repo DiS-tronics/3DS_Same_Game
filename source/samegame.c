@@ -46,8 +46,7 @@ int m_nColors;                         // number of colors
 /*!
  * \brief     Initialize the game
  *
- * \details   Initialize the game, allocate the memory for the board and 
- * \n         fill it up with random colors.
+ * \details   Initialize the game relevant data.
  *
  * \param     none
  *
@@ -72,8 +71,6 @@ void SAGA_GameInit(void)
   m_arrColors[7] = ORANGE;
   
   srand(time(NULL));
-  
-  SAGA_SetupBoard();
 }
 
 //*==============================================================================*/

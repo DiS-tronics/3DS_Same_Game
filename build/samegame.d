@@ -1,5 +1,6 @@
-samegame.o: c:/devkitPro/3ds_apps/games/3DS_Same_Game/source/samegame.c \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/system.h \
+samegame.o: \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/source/samegame.c \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/system.h \
  c:/devkitPro/libctru/include/3ds.h \
  c:/devkitPro/libctru/include/3ds/types.h \
  c:/devkitPro/libctru/include/3ds/result.h \
@@ -70,17 +71,18 @@ samegame.o: c:/devkitPro/3ds_apps/games/3DS_Same_Game/source/samegame.c \
  c:/devkitPro/libctru/include/c3d/lightlut.h \
  c:/devkitPro/libctru/include/c3d/renderbuffer.h \
  c:/devkitPro/libctru/include/c3d/renderqueue.h \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/lodepng.h \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/samegame.h \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/render.h \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/build/vshader_shbin.h \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/build/ballsprites_png.h \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/build/game_bgr.h \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/build/won_bgr.h \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/build/over_bgr.h \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/samegame.h
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/lodepng.h \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/samegame.h \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/render.h \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/vshader_shbin.h \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/ballsprites_png.h \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/game_bgr.h \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/won_bgr.h \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/over_bgr.h \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/again_bgr.h \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/samegame.h
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/system.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/system.h:
 
 c:/devkitPro/libctru/include/3ds.h:
 
@@ -222,20 +224,22 @@ c:/devkitPro/libctru/include/c3d/renderbuffer.h:
 
 c:/devkitPro/libctru/include/c3d/renderqueue.h:
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/lodepng.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/lodepng.h:
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/samegame.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/samegame.h:
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/render.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/render.h:
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/build/vshader_shbin.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/vshader_shbin.h:
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/build/ballsprites_png.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/ballsprites_png.h:
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/build/game_bgr.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/game_bgr.h:
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/build/won_bgr.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/won_bgr.h:
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/build/over_bgr.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/over_bgr.h:
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/samegame.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/again_bgr.h:
+
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/samegame.h:
