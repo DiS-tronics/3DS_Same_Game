@@ -52,75 +52,59 @@ int main(int argc, char **argv)
 	bool bGameOver = false;              // game over checking
 
 	SAGA_GameInit();                     // create a game field
-	
-	gfxInitDefault();                    // initialize graphics
-	//gfxSet3D(true);                    // using stereoscopic 3D (planed for the future)
-	
-	// double buffering isn't needed here, thus a image is drawn only once on screen
-	gfxSetDoubleBuffering(GFX_TOP, false); 
-
-	
-	C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
-
-	// initialize the render target
-	C3D_RenderTarget* target = C3D_RenderTargetCreate(240, 320, GPU_RB_RGBA8, GPU_RB_DEPTH24_STENCIL8);
-	C3D_RenderTargetSetClear(target, C3D_CLEAR_ALL, CLEAR_COLOR, 0);
-	C3D_RenderTargetSetOutput(target, GFX_BOTTOM, GFX_LEFT, DISPLAY_TRANSFER_FLAGS);
-
+	RDR_DisplayInit();                   // display and rendering settings
 	RDR_SceneInit();                     // initialize the scene
                  
 	bool bTouched = false;               // if bottom screen is touched
-	bool bEND = false;                   // if game has ended
-	 
-	touchPosition touch = { 0 };
-	touchPosition t_queue = { 0 };
+	touchPosition touch = { 0 };         // save the touch inputs
+	touchPosition t_queue = { 0 };       // save old touch inputs for camparison
 
-	iMode = NEW_GAME_MODE;
+	iMode = NEW_GAME_MODE;               // start with a new game
 
-	// Main loop
-	while (aptMainLoop()) 
+	
+	while (aptMainLoop())                // Main loop
 	{
-		if(iMode == NEW_GAME_MODE)        // do as long as new game is choosen
+		hidScanInput();                    // check wheter there are user inputs
+
+		if(iMode == NEW_GAME_MODE)         // do as long as new game is choosen
 		{
 			RDR_DrawSplashScreen(GFX_TOP, game_bgr, game_bgr_size, 0);
 		
-			SAGA_SetupBoard();                 // fill game board with random colors
-			RDR_DrawGameBoard();               // draw the board on the screen
+			SAGA_SetupBoard();               // fill game board with random colors
+			RDR_DrawGameBoard();             // draw the board on the screen
 
-			iMode = GAME_PLAY_MODE;            // enter game mode
+			iMode = GAME_PLAY_MODE;          // enter game mode
 		}
 
 		if(iMode == GAME_PLAY_MODE)        // do as long as new game is choosen
     {
-			if (!bGameOver)                    // do till game is over
+			if (!bGameOver)                  // do till game is over
 			{
-				hidTouchRead(&touch);            // read the touch screen coordinates	 
+				hidTouchRead(&touch);          // read the touch screen coordinates	 
 
 				if (VALID_NEW_TOUCH_POS && bTouched == false)
 				{
-					iERow = touch.py / 32;         // calculate the selected game board row
-					iEColumn = touch.px / 32;      // calculate the selected game board column
+					iERow = touch.py / 32;       // calculate the selected game board row
+					iEColumn = touch.px / 32;    // calculate the selected game board column
 
 					SAGA_DeleteBlocks(iERow, iEColumn);  // delete blocks if possible
 					RDR_DrawGameBoard();                 // draw the game board on the display
 					bGameOver = SAGA_IsGameOver();       // check whether there are still blocks
 
-					t_queue.px = touch.px;         // save the old touch coordinates in x
-					t_queue.py = touch.py;         // save the old touch coordinates in y
-					bTouched = true;               // start the delay counter for touch detection
+					t_queue.px = touch.px;       // save the old touch coordinates in x
+					t_queue.py = touch.py;       // save the old touch coordinates in y
+					bTouched = true;             // start the delay counter for touch detection
 				}
 
-				SYS_TouchDelay(&bTouched);       // non-blocking delay for touch input
+				SYS_TouchDelay(&bTouched);     // non-blocking delay for touch input
 
 				// animated movement of the sprites --> for future use
 				//RDR_MoveSprites();
 				
-				RDR_SceneRender(target);         // Render the game scene
+				RDR_SceneRender();             // Render the game scene
 			}
-			else
+			else                             // do this after game is finished
 			{
-				if (!bEND)                       // do this after game is finished
-				{
 					// check if there are undeletable blocks remaining
 					iRemaining = SAGA_GetRemainingCount(); 
 				
@@ -129,22 +113,27 @@ int main(int argc, char **argv)
 						RDR_DrawSplashScreen(GFX_TOP, won_bgr, won_bgr_size, 0);
 					else
 						RDR_DrawSplashScreen(GFX_TOP, over_bgr, over_bgr_size, 0);
-					bEND = true;
-				}
+					
+					iMode = GAME_END_MODE;       // change to game end mode
 			}
 		
-			RDR_SceneRender(target);         // Render the game scene
-			
-			if(bEND)
+			RDR_SceneRender();               // Render the game scene
+		}
+		
+		if(iMode == GAME_END_MODE)
+		{
+			RDR_DrawSplashScreen(GFX_BOTTOM, again_bgr, again_bgr_size, 0);
+
+			u32 kDown = hidKeysDown();
+			if(kDown & KEY_A)
 			{
-				SYS_WaitForInput(KEY_A);
-				bEND = false;
 				bGameOver = false;
 				iMode = NEW_GAME_MODE;
 			}
 		}
+			
 
-		if(SYS_UserExit())               // exit the program if START is pressed
+		if(SYS_UserExit())                 // exit the program if START is pressed
 			break;
 
 		gfxSwapBuffers();

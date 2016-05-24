@@ -25,6 +25,7 @@
 /*-------------------------------------------------------------------------------*/
 /*  Global variables                                                             */
 /*-------------------------------------------------------------------------------*/
+C3D_RenderTarget* target;
 Sprite sprites[NUM_SPRITES];
 
 /*struct { float left, right, top, bottom; } images[4] = {
@@ -52,6 +53,24 @@ static int uLoc_projection;
 static C3D_Mtx projection;
 
 static C3D_Tex spritesheet_tex;
+
+void RDR_DisplayInit(void)
+{
+	gfxInitDefault();                    // initialize graphics
+	//gfxSet3D(true);                    // using stereoscopic 3D (planed for the future)
+	
+	// double buffering isn't needed here, thus a image is drawn only once on screen
+	gfxSetDoubleBuffering(GFX_TOP, false); 
+	gfxSetDoubleBuffering(GFX_BOTTOM, false);
+	
+	C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
+
+	// initialize the render target
+	target = C3D_RenderTargetCreate(240, 320, GPU_RB_RGBA8, GPU_RB_DEPTH24_STENCIL8);
+	C3D_RenderTargetSetClear(target, C3D_CLEAR_ALL, CLEAR_COLOR, 0);
+	C3D_RenderTargetSetOutput(target, GFX_BOTTOM, GFX_LEFT, DISPLAY_TRANSFER_FLAGS);
+}
+
 
 //*==============================================================================*/
 /*  RDR_DrawSplashScreen                                                         */
@@ -281,7 +300,7 @@ void RDR_MoveSprites(void) {
 }
 
 //---------------------------------------------------------------------------------
-void RDR_SceneRender(C3D_RenderTarget* target) {
+void RDR_SceneRender(void) {
 //---------------------------------------------------------------------------------
 	int i;
 	C3D_FrameBegin(C3D_FRAME_SYNCDRAW);

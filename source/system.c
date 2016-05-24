@@ -91,8 +91,6 @@ void SYS_WaitForInput(u32 iKey)
 /*===============================================================================*/
 bool SYS_UserExit(void)
 {
-	hidScanInput();
-
 	// Respond to user input
 	u32 kDown = hidKeysDown();
 	if (kDown & KEY_START)             // if START is pressed
