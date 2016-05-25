@@ -125,8 +125,8 @@ int main(int argc, char **argv)
 			RDR_DrawSplashScreen(GFX_BOTTOM, again_bgr, again_bgr_size, 0);
 
 			u32 kDown = hidKeysDown();
-			if(kDown & KEY_A)
-			{
+			if(kDown & KEY_A || kDown & KEY_TOUCH) // start new game if button A
+			{                                      // or touch screen is pressed
 				bGameOver = false;
 				iMode = NEW_GAME_MODE;
 			}
