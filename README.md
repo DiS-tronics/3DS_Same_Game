@@ -1,6 +1,8 @@
 # 3DS Same Game
 
-This is a homebrew game for the 3DS.
+This is a homebrew game for the 3DS. See screenshot below:
+
+![screenshot](https://cloud.githubusercontent.com/assets/19431693/15447203/6b7f4bb6-1f39-11e6-9c62-37b8f2d91cae.png)
 
 ### Description of the game itself:
 A game where blocks with different colors are ordered randomly to form a field. 
