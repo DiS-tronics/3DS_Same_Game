@@ -57,13 +57,14 @@ typedef struct {  // simple sprite struct
 /*-------------------------------------------------------------------------------*/
 /*  Function prototypes                                                          */
 /*-------------------------------------------------------------------------------*/
+void RDR_DisplayInit(void);
 void RDR_DrawSprite( int x, int y, int width, int height, int image );
 void RDR_SceneInit(void);
 void RDR_MoveSprites(void);
 void RDR_SceneRender(void);
 void RDR_SceneExit(void);
 void RDR_DrawGameBoard(void);
-void RDR_DrawSplashScreen(const u8 image[], u32 image_size, u8 leftOrRight);
+void RDR_DrawSplashScreen(gfxScreen_t screen, const u8 image[], u32 image_size, u8 leftOrRight);
 
 //---------------------------------------------------------------------------------
 #endif // RENDER_H

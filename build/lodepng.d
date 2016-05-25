@@ -1,4 +1,4 @@
-lodepng.o: c:/devkitPro/3ds_apps/games/3DS_Same_Game/source/lodepng.c \
- c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/lodepng.h
+lodepng.o: c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/source/lodepng.c \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/lodepng.h
 
-c:/devkitPro/3ds_apps/games/3DS_Same_Game/include/lodepng.h:
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/include/lodepng.h:

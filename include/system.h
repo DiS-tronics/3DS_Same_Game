@@ -42,20 +42,24 @@
 #include "game_bgr.h"
 #include "won_bgr.h"
 #include "over_bgr.h"
+#include "again_bgr.h"
 
 /*-------------------------------------------------------------------------------*/
 /*  Defines                                                                      */
 /*-------------------------------------------------------------------------------*/
 #define BUFSIZE         64
-#define GAME_MODE       0
-#define NEW_EXIT_MODE   1
-#define POWER_OFF_MODE  2
+#define GAME_PLAY_MODE  1
+#define NEW_GAME_MODE   2
+#define GAME_END_MODE   3
+#define POWER_OFF_MODE  4
 #define VALID_NEW_TOUCH_POS touch.px > 0 && touch.py > 0 && touch.px != t_queue.px && touch.py != t_queue.py
 
 /*-------------------------------------------------------------------------------*/
 /*  Function prototypes                                                          */
 /*-------------------------------------------------------------------------------*/
 void SYS_TouchDelay(bool *bTouched);
+void SYS_WaitForInput(u32 iKey);
+bool SYS_UserExit(void);
 
 //---------------------------------------------------------------------------------
 #endif // SYSTEM_H

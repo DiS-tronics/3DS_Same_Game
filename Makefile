@@ -35,7 +35,7 @@ INCLUDES	      :=  include
 GRAPHICS	      :=  graphic
 RESOURCE          :=  app
 ICON		      :=  $(RESOURCE)/icon48x48.png
-VERSION           :=  v0.1
+VERSION           :=  v0.2
 #ROMFS		      := romfs
 
 APP_TITLE         :=  The Same Game $(VERSION)
@@ -43,7 +43,7 @@ APP_DESCRIPTION   :=  The Same Game $(VERSION)
 APP_AUTHOR        :=  DiS-tronics
 
 BUILD_CIA         :=  1
-CIA_VER           :=  0001
+CIA_VER           :=  0002
 MAKEROM           :=  $(DEVKITARM)/bin/makerom
 
 #---------------------------------------------------------------------------------

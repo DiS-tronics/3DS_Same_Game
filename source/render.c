@@ -25,6 +25,7 @@
 /*-------------------------------------------------------------------------------*/
 /*  Global variables                                                             */
 /*-------------------------------------------------------------------------------*/
+C3D_RenderTarget* target;
 Sprite sprites[NUM_SPRITES];
 
 /*struct { float left, right, top, bottom; } images[4] = {
@@ -53,6 +54,24 @@ static C3D_Mtx projection;
 
 static C3D_Tex spritesheet_tex;
 
+void RDR_DisplayInit(void)
+{
+	gfxInitDefault();                    // initialize graphics
+	//gfxSet3D(true);                    // using stereoscopic 3D (planed for the future)
+	
+	// double buffering isn't needed here, thus a image is drawn only once on screen
+	gfxSetDoubleBuffering(GFX_TOP, false); 
+	gfxSetDoubleBuffering(GFX_BOTTOM, false);
+	
+	C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
+
+	// initialize the render target
+	target = C3D_RenderTargetCreate(240, 320, GPU_RB_RGBA8, GPU_RB_DEPTH24_STENCIL8);
+	C3D_RenderTargetSetClear(target, C3D_CLEAR_ALL, CLEAR_COLOR, 0);
+	C3D_RenderTargetSetOutput(target, GFX_BOTTOM, GFX_LEFT, DISPLAY_TRANSFER_FLAGS);
+}
+
+
 //*==============================================================================*/
 /*  RDR_DrawSplashScreen                                                         */
 /*-------------------------------------------------------------------------------*/
@@ -67,10 +86,10 @@ static C3D_Tex spritesheet_tex;
  * \return    none
  */
 /*===============================================================================*/
-void RDR_DrawSplashScreen(const u8 image[], u32 image_size, u8 leftOrRight)
+void RDR_DrawSplashScreen(gfxScreen_t screen, const u8 image[], u32 image_size, u8 leftOrRight)
 {            
 	// get the top screen's frame buffer
-	u8* ft = gfxGetFramebuffer(GFX_TOP, leftOrRight?GFX_LEFT:GFX_RIGHT, NULL, NULL); 
+	u8* ft = gfxGetFramebuffer(screen, leftOrRight?GFX_LEFT:GFX_RIGHT, NULL, NULL); 
 	
 	// copy image in the top screen's frame buffer
 	memcpy(ft, image, image_size); 	
@@ -254,7 +273,7 @@ void RDR_SceneInit(void) {
 			sprites[i].dy = -sprites[i].dy;
 	}*/
 	
-	RDR_DrawGameBoard();
+	//RDR_DrawGameBoard();
 
 	// Configure depth test to overwrite pixels with the same depth (needed to draw overlapping sprites)
 	C3D_DepthTest(true, GPU_GEQUAL, GPU_WRITE_ALL);
@@ -284,6 +303,9 @@ void RDR_MoveSprites(void) {
 void RDR_SceneRender(void) {
 //---------------------------------------------------------------------------------
 	int i;
+	C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+	C3D_FrameDrawOn(target);
+	
 	// Update the uniforms
 	C3D_FVUnifMtx4x4(GPU_VERTEX_SHADER, uLoc_projection, &projection);
 
@@ -291,6 +313,8 @@ void RDR_SceneRender(void) {
 
 		RDR_DrawSprite( sprites[i].x >> 8, sprites[i].y >> 8, 32, 32, sprites[i].image);
 	}
+
+	C3D_FrameEnd(0);
 }
 
 //---------------------------------------------------------------------------------

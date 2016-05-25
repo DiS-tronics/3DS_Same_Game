@@ -9,9 +9,9 @@ If blocks are deleted the remaining blocks always move up to the left bottom cor
 of the game board. The goal of the Same Game is to delete all blocks of the field.
 
 ### Playing instructions:
-The game is very simple to play, just use the touch-screen as input. Unfortunately
-it is in a very early state, so that there is no option to play it again after it's
-finished, thus just press the START button to exit.
+The game is very simple to play, just use the touch-screen as input. After the game 
+is finished press A or tap the touch-screen to play again. Just press the START button 
+at any time to exit. Of course one can use the home button to pause the game.
 
 ### Build instructions:
 Some batch files are added that ease the building process. The create_banner.bat has to

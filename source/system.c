@@ -50,4 +50,53 @@ void SYS_TouchDelay(bool *bTouched)
 	}
 }
 
+//*==============================================================================*/
+/*  SYS_WaitForInput                                                             */
+/*-------------------------------------------------------------------------------*/
+/*!
+ * \brief     Delay
+ *
+ * \details   Blocking delay for special situations.
+ *
+ * \param     iKey --> specifies the key to wait for
+ *
+ * \return    none
+ */
+/*===============================================================================*/
+void SYS_WaitForInput(u32 iKey)
+{
+	gfxSetDoubleBuffering(GFX_BOTTOM, false); 
+
+	while(!(hidKeysDown() & iKey))
+	{
+		RDR_DrawSplashScreen(GFX_BOTTOM, again_bgr, again_bgr_size, 0);
+		hidScanInput();
+		gfxSwapBuffers();
+	}
+}
+
+//*==============================================================================*/
+/*  SYS_UserExit                                                                 */
+/*-------------------------------------------------------------------------------*/
+/*!
+ * \brief     User wants to exit the program?
+ *
+ * \details   Check if the user wants to exit  the program by pressing the
+ * \n         START button.
+ *
+ * \param     none
+ *
+ * \return    true or false
+ */
+/*===============================================================================*/
+bool SYS_UserExit(void)
+{
+	// Respond to user input
+	u32 kDown = hidKeysDown();
+	if (kDown & KEY_START)             // if START is pressed
+		return 1;                        // break in order to return to hbmenu
+	else
+		return 0;
+}
+
 /*------------------------------------END----------------------------------------*/
