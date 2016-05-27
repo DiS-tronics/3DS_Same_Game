@@ -41,6 +41,7 @@
 // these headers containing definitions of our image
 #include "game_bgr.h"
 #include "menu_bgr.h"
+#include "options_bgr.h"
 #include "won_bgr.h"
 #include "over_bgr.h"
 #include "again_bgr.h"

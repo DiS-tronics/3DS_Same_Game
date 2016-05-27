@@ -77,6 +77,7 @@ main.o: c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/source/main.c \
  c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/ballsprites_png.h \
  c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/game_bgr.h \
  c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/menu_bgr.h \
+ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/options_bgr.h \
  c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/won_bgr.h \
  c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/over_bgr.h \
  c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/again_bgr.h
@@ -236,6 +237,8 @@ c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/ballsprites_png.h:
 c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/game_bgr.h:
 
 c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/menu_bgr.h:
+
+c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/options_bgr.h:
 
 c:/devkitPro/3DS_APP_DEV/games/3DS_Same_Game/build/won_bgr.h:
 

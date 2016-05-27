@@ -76,6 +76,31 @@ int main(int argc, char **argv)
 			{                                      // is pressed
 				iMode = NEW_GAME_MODE;
 			}
+			if(kDown & KEY_B)                      // show options if button B
+			{                                      // is pressed
+				while(hidKeysDown() & KEY_B)
+					hidScanInput();
+				iMode = OPTIONS_MODE;
+			}
+		}
+
+		if(iMode == OPTIONS_MODE)
+		{
+			RDR_DrawSplashScreen(GFX_TOP, game_bgr, game_bgr_size, 0);
+			RDR_DrawSplashScreen(GFX_BOTTOM, options_bgr, options_bgr_size, 0);
+
+			u32 kDown = hidKeysDown();
+			//u32 kUp = hidKeysUp();
+			if(kDown & KEY_A)                      // start new game if button A
+			{                                      // is pressed
+				iMode = NEW_GAME_MODE;
+			}
+			if(kDown & KEY_B)                      // open main menu if button B
+			{                                      // is pressed
+				while(hidKeysDown() & KEY_B)
+					hidScanInput();
+				iMode = MAIN_MENU_MODE;
+			}
 		}
 		
 		if(iMode == NEW_GAME_MODE)         // do as long as new game is choosen
