@@ -59,13 +59,25 @@ int main(int argc, char **argv)
 	touchPosition touch = { 0 };         // save the touch inputs
 	touchPosition t_queue = { 0 };       // save old touch inputs for camparison
 
-	iMode = NEW_GAME_MODE;               // start with a new game
+	iMode = MAIN_MENU_MODE;              // start with the main menu
 
 	
 	while (aptMainLoop())                // Main loop
 	{
 		hidScanInput();                    // check wheter there are user inputs
 
+		if(iMode == MAIN_MENU_MODE)
+		{
+			RDR_DrawSplashScreen(GFX_TOP, game_bgr, game_bgr_size, 0);
+			RDR_DrawSplashScreen(GFX_BOTTOM, menu_bgr, menu_bgr_size, 0);
+
+			u32 kDown = hidKeysDown();
+			if(kDown & KEY_A)                      // start new game if button A
+			{                                      // is pressed
+				iMode = NEW_GAME_MODE;
+			}
+		}
+		
 		if(iMode == NEW_GAME_MODE)         // do as long as new game is choosen
 		{
 			RDR_DrawSplashScreen(GFX_TOP, game_bgr, game_bgr_size, 0);

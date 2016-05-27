@@ -40,6 +40,7 @@
 
 // these headers containing definitions of our image
 #include "game_bgr.h"
+#include "menu_bgr.h"
 #include "won_bgr.h"
 #include "over_bgr.h"
 #include "again_bgr.h"
@@ -51,7 +52,9 @@
 #define GAME_PLAY_MODE  1
 #define NEW_GAME_MODE   2
 #define GAME_END_MODE   3
-#define POWER_OFF_MODE  4
+#define MAIN_MENU_MODE  4
+#define OPTIONS_MODE    5
+#define POWER_OFF_MODE  6
 #define VALID_NEW_TOUCH_POS touch.px > 0 && touch.py > 0 && touch.px != t_queue.px && touch.py != t_queue.py
 
 /*-------------------------------------------------------------------------------*/

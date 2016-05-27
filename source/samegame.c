@@ -143,14 +143,17 @@ void SAGA_DeleteBoard(void)
 {
   int row;
   
-  //  Delete each colomn
-  for(row = 0; row < m_nRows; row++)
-  {
-    free(m_arrBoard[row]);
-  }
+	if(m_arrBoard != NULL)
+	{
+		//  Delete each colomn
+		for(row = 0; row < m_nRows; row++)
+		{
+			free(m_arrBoard[row]);
+		}
   
-  // Finally delete the array of rows
-  free(m_arrBoard);
+		// Finally delete the array of rows
+		free(m_arrBoard);
+	}
 }
 
 //*==============================================================================*/
